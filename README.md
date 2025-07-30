@@ -21,7 +21,7 @@ Developed by KHAIO for the AI education community.
 ## 📄 Lizenz
 This toolkit is licensed under an open educational license for free use in educational institutions.
 
-🎓 Educational Philosophy
+## 🎓 Educational Philosophy
 This toolkit emphasizes:
 
 AI as a learning partner, not a replacement for thinking
@@ -30,7 +30,7 @@ Ethical considerations in AI development and deployment
 Community engagement through real-world applications
 Collaborative learning through peer assessment and teaching
 
-🌍 Global Adaptation
+## 🌍 Global Adaptation
 While designed for secondary education, activities can be adapted for:
 
 Different educational systems (K-12, GCSE, IB, etc.)
@@ -38,7 +38,7 @@ Various cultural contexts
 Multiple languages
 Different grade levels
 
-🔒 Privacy & Compliance
+## 🔒 Privacy & Compliance
 
 No personal data collection
 Uses publicly available AI tools
