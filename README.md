@@ -3,22 +3,19 @@
 ## Beschreibung
 Creative and ethical AI integration for students ages 12-17. This interactive toolkit offers 11 structured activities for teachers to responsibly integrate AI into their classrooms.
 
-## Zielgruppe
+## Target Group
 - Secondary school teachers
 - Students ages 12-17
 - Educational institutions that want to promote AI literacy
 
-## Was ist enthalten?
+## What's included?
 - 11 detailed teaching activities (4-8 weeks implementation)
 - Interactive prompt examples to copy
 - EU AI Act compliant guidelines
 - Grading rubric for each activity
 - Instant start tips for each activity
 
-## Kontakt
-Developed by KHAIO for the AI education community.
-
-## Lizenz
+## License
 This toolkit is licensed under an open educational license for free use in educational institutions.
 
 ## Educational Philosophy
