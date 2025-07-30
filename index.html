@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Toolkit for Secondary Schools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #8458F2 0%, #000000 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .khaio-logo {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #8458F2;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        .community-note {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 1rem;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .activity-header {
+            padding: 25px;
+            background: linear-gradient(135deg, #8458F2 0%, #000000 100%);
+            color: white;
+            position: relative;
+        }
+
+        .activity-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .activity-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .activity-body {
+            padding: 25px;
+        }
+
+        .activity-description {
+            margin-bottom: 20px;
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .expand-btn {
+            background: #8458F2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .expand-btn:hover {
+            background: #6A47D1;
+            transform: translateY(-1px);
+        }
+
+        .activity-details {
+            display: none;
+            padding: 25px;
+            border-top: 1px solid #e2e8f0;
+            background: #f7fafc;
+        }
+
+        .activity-details.show {
+            display: block;
+        }
+
+        .details-section {
+            margin-bottom: 30px;
+        }
+
+        .details-section h4 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #8458F2;
+            padding-bottom: 5px;
+        }
+
+        .implementation-steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .implementation-steps li {
+            counter-increment: step-counter;
+            margin-bottom: 15px;
+            padding-left: 40px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .implementation-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #8458F2;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .prompt-example {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            position: relative;
+            line-height: 1.5;
+            border-left: 4px solid #8458F2;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #8458F2;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: #6A47D1;
+        }
+
+        .download-btn {
+            background: #54E1E5;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #45C7CB;
+        }
+
+        .eu-compliance {
+            background: #e6fffa;
+            border: 1px solid #54E1E5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .eu-compliance h5 {
+            color: #234e52;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .quick-start {
+            background: #fff5f5;
+            border: 1px solid #EB7052;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .quick-start h5 {
+            color: #c53030;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .ai-tools {
+            background: #f0fff4;
+            border: 1px solid #54E1E5;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .ai-tools h5 {
+            color: #276749;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tool-tag {
+            background: #54E1E5;
+            color: #1a365d;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .activity-card {
+                margin-bottom: 20px;
+            }
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #54E1E5;
+            color: #1a365d;
+            padding: 15px 25px;
+            border-radius: 10px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="khaio-logo">KHAIO</div>
+            <h1>🤖 AI Toolkit for Secondary Schools</h1>
+            <p>Creative and ethical AI integration for students aged 12-17 years</p>
+            <div class="community-note">
+                💡 <strong>Living Document:</strong> This toolkit is designed as a foundation for regular teacher exchange sessions. Use the monthly sessions to share experiences, discover new tools, and collaboratively develop innovative applications.
+            </div>
+        </div>
+
+        <div class="activities-grid" id="activitiesGrid">
+            <!-- Activities will be populated by JavaScript -->
+        </div>
+
+        <div class="footer">
+            <div class="footer-logo">KHAIO</div>
+            <p>Developed for the AI education community</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const activities = [
+            {
+                id: 1,
+                title: "AI Prompt Lab with Peer Assessment",
+                description: "Structured environment for developing prompt engineering skills through four progressive stages with peer evaluation and critical reflection.",
+                time: "4-8 weeks",
+                implementation: [
+                    "Weeks 1-2: Prompt basics, documentation in AI learning journals",
+                    "Weeks 3-4: Peer assessment with rubric for prompt clarity and effectiveness",
+                    "Weeks 5-6: Systematic bias detection in AI responses - document and analyze",
+                    "Weeks 7-8: Advanced prompt optimization and source verification with multiple tools"
+                ],
+                promptExample: "You are an AI assistant for English literature class at a secondary school. Analyze the literary devices in the following text excerpt from 'Romeo and Juliet': [Text excerpt would be inserted here]. Explain the effect of at least three different stylistic devices on the reader and justify how they contribute to character development. Use literary analysis terminology, but explain complex terms clearly for secondary school students. Structure your response as follows: 1) Identification of literary devices with text citations, 2) Analysis of their respective effects, 3) Connection to characterization, 4) Summary of overall impact. Make sure to distinguish between objective analysis and subjective interpretation.",
+                assessment: "Peer assessment rubric: Prompt clarity (1-4), Source verification (1-4), Bias recognition (1-4), Reflection depth (1-4). Monthly portfolio reviews to document learning progress.",
+                euCompliance: "✅ Permitted (minimal risk, educational purpose, no personal data)",
+                quickStart: "Start with a simple prompt example from your subject and have students question and improve the AI response!",
+                aiTools: ["ChatGPT", "Claude", "Gemini", "Copilot"]
+            },
+            {
+                id: 2,
+                title: "Teacher-GPT with Student Co-Creation",
+                description: "Students help create and test personalized teacher AI assistants while learning about AI training and ethical boundaries.",
+                time: "4-6 weeks",
+                implementation: [
+                    "Phase 1: Students interview teacher about teaching style and pedagogical philosophy",
+                    "Phase 2: Collaborative prompt engineering sessions for Custom GPT",
+                    "Phase 3: 2-week testing phase with structured student feedback",
+                    "Phase 4: Creation of usage guidelines and ethical usage rules"
+                ],
+                promptExample: "You are Mrs. Johnson, a biology teacher at a secondary school with 12 years of teaching experience. Your pedagogical philosophy is based on discovery learning and the principle 'Understanding through Experimentation'. You always explain complex biological concepts in three steps: 1) Connect to everyday life, 2) Provide scientific explanation, 3) Show practical application. Your communication style is patient, encouraging, and questioning. You never give direct answers to homework but guide students through targeted questions to their own insights. Your typical phrases are: 'What do you think?' and 'Let's think about this together'. When students make mistakes, you say: 'That's an interesting thought, but let's look at this again...'. You always encourage students to question their observations and develop their own hypotheses. Only respond to biology-related questions and refer to the real Mrs. Johnson in class for other topics.",
+                assessment: "Students document contributions to GPT development, test accuracy against real teacher feedback, and create improvement reports.",
+                euCompliance: "✅ Permitted with transparency (clearly marked as AI, no student data in training)",
+                quickStart: "Develop a simple subject assistant with your class and have students evaluate its responses!",
+                aiTools: ["CustomGPT", "Claude Projects", "Poe", "Character.AI"]
+            },
+            {
+                id: 3,
+                title: "AI Podcast Studio for the Community",
+                description: "Students create subject-specific podcasts using AI tools for authentic community audiences while learning digital media production.",
+                time: "6 weeks",
+                implementation: [
+                    "Week 1: Target audience analysis and survey of knowledge gaps in the community",
+                    "Weeks 2-3: AI-supported research and podcast script development with NotebookLM",
+                    "Week 4: Fact-checking with primary sources and expert interviews",
+                    "Week 5: Revision based on target audience feedback",
+                    "Week 6: Public presentation with community stakeholders and Q&A"
+                ],
+                promptExample: "Create a detailed 15-minute podcast script about the effects of climate change on our local region [insert region] for parents of secondary school students who want to discuss this complex topic with their children. The script should be scientifically accurate but understandable and have the following structure: 1) Introduction with local hook (2 min.), 2) Climate change basics simply explained (4 min.), 3) Concrete local impacts with examples (5 min.), 4) What families can do - practical tips (3 min.), 5) Positive outlook and motivation (1 min.). Integrate three conversation starters for parent-child discussions and suggest two simple experiments that families can do at home. Use warm, inviting language and avoid technical terms or explain them immediately. Add a brief reflection question every 2-3 minutes where listeners can pause briefly.",
+                assessment: "Rubric: Factual accuracy (25%), Effective AI tool usage (25%), Community engagement (25%), Critical evaluation of AI outputs (25%).",
+                euCompliance: "✅ Fully compliant (educational/informational purpose, transparent AI usage)",
+                quickStart: "Start with a local topic and use NotebookLM for the first podcast draft!",
+                aiTools: ["NotebookLM", "Descript", "Audacity", "ElevenLabs", "Anchor"]
+            },
+            {
+                id: 4,
+                title: "Interactive Presentation Lab with Peer Teaching",
+                description: "Students use AI tools for engaging presentations and teach these design skills to younger students.",
+                time: "5 weeks",
+                implementation: [
+                    "Week 1: Design principles and AI tool training for presentation creation",
+                    "Week 2: Development of subject-specific presentations with interactive elements",
+                    "Week 3: Peer teaching preparation and pedagogical methodology training",
+                    "Week 4: Conducting presentation workshops for younger classes",
+                    "Week 5: Reflection and improvement based on teaching experiences"
+                ],
+                promptExample: "Create a visually impressive and interactive presentation about 'Renewable Energy in the United States' for a 7th grade class (25 students, 45 minutes class time). The presentation should meet the following requirements: 1) Maximum 15 slides with clear visual hierarchy, 2) At least 4 interactive elements (polls, quiz questions, discussion points), 3) Practical examples from students' everyday lives, 4) A closing activity where students actively participate. Structure the presentation as follows: Opening with provocative question (2 min.), Basics with visualizations (10 min.), Interactive part with group work (15 min.), Local examples and field trip opportunities (10 min.), Summary and outlook (8 min.). Integrate modern design elements like animations, consistent color palette, and large, readable fonts. Suggest specific tools (Mentimeter for polls, etc.) and give moderation tips for each section. The presentation should serve as a template that other students can adapt for their own topics.",
+                assessment: "Evaluation: Presentation quality (30%), Teaching effectiveness (30%), AI tool mastery (20%), Reflection quality (20%).",
+                euCompliance: "✅ Permitted (educational purpose, warnings about over-dependence included in curriculum)",
+                quickStart: "Use Gamma or Canva to visually enhance an existing lesson!",
+                aiTools: ["Gamma", "Canva", "Prezi", "Mentimeter", "Beautiful.AI"]
+            },
+            {
+                id: 5,
+                title: "AI Debate Championship with Expert Jury",
+                description: "Structured debates with AI-generated counterarguments and evaluation by community experts to promote critical thinking.",
+                time: "8 weeks",
+                implementation: [
+                    "Weeks 1-2: Training in debate techniques and AI argumentation tools",
+                    "Weeks 3-4: Practice rounds in small groups with AI opposition and peer feedback",
+                    "Weeks 5-6: Expert workshops with community professionals for advanced argumentation",
+                    "Week 7: Qualifying rounds with class competitions and expert jury",
+                    "Week 8: Final championship as school-wide event with community audience"
+                ],
+                promptExample: "You are an experienced debate coach and argumentation expert. I represent the position in a school debate: 'Smartphones should be completely banned during all school hours.' Generate three strong, evidence-based counterarguments against my position that meet the following criteria: 1) Each argument is based on current studies or expert opinions, 2) The arguments address different aspects (pedagogical, practical, social), 3) Each argument contains at least one concrete example or statistic, 4) The arguments are formulated in a way that 9th grade students can understand. Structure each counterargument as follows: Thesis - Justification - Evidence - Example - Conclusion. After each argument, add a note on how I as a debater could respond to it, and identify potential weaknesses in the argumentation. Use respectful but challenging language that encourages critical thinking.",
+                assessment: "Multi-dimensional evaluation: Argument quality (expert jury), AI interaction effectiveness (self-assessment), Research depth (peer review), Fairness (audience feedback).",
+                euCompliance: "✅ Permitted (transparent AI usage, clearly maintained educational dialogue context)",
+                quickStart: "Start with a current local topic and have AI generate counterarguments!",
+                aiTools: ["ChatGPT", "Claude", "Perplexity", "Socratic"]
+            },
+            {
+                id: 6,
+                title: "AI Innovation Hall of Fame with Community Showcase",
+                description: "Students document exceptional AI applications in a digital gallery and present them to the community.",
+                time: "Ongoing",
+                implementation: [
+                    "Documentation system: Create detailed case studies of innovative AI usage",
+                    "Peer review process: Quality control through student editorial team",
+                    "Community curation: Local professionals help select outstanding innovations",
+                    "Public showcases: Monthly community events with student innovations",
+                    "Mentoring program: Successful students mentor newcomers"
+                ],
+                promptExample: "Help me create a comprehensive case study for our school innovation gallery. I used ChatGPT to develop a personalized learning plan for mathematics that adapts to my difficulties with geometry. Create a structured documentation according to the following scheme: 1) Problem statement (What learning problem needed to be solved?), 2) AI solution (How exactly was ChatGPT used? Which prompts were used?), 3) Implementation (How was the plan implemented? What challenges arose?), 4) Results (Measurable improvements, time savings, learning progress), 5) Ethical considerations (Privacy, dependency, AI limitations), 6) Transferability (How can other students use this method?), 7) Improvement suggestions (What would I do differently next time?). The documentation should serve as inspiration and guidance for other students, honestly report successes and failures, and contain concrete, traceable steps. Write in a personal but professional style and integrate screenshots or examples where possible.",
+                assessment: "Portfolio-based evaluation: Innovation quality, Documentation completeness, Ethical reasoning, Community impact, Mentoring effectiveness.",
+                euCompliance: "✅ Compliant with proper anonymization and consent processes",
+                quickStart: "Have students document a clever AI usage and present it in class!",
+                aiTools: ["Notion", "Padlet", "Canva", "Flipgrid", "Google Sites"]
+            },
+            {
+                id: 7,
+                title: "Student-Led AI Education Program",
+                description: "Advanced students develop and teach AI competencies for different target groups in the school community.",
+                time: "Full semester",
+                implementation: [
+                    "Teacher training: Students learn instructional design and adult education principles",
+                    "Curriculum development: Age-appropriate AI competency lessons for different target groups",
+                    "Pilot testing: Small group trials with structured feedback collection",
+                    "Implementation: Workshops for various community groups",
+                    "Program evaluation: Assessment of teaching effectiveness and learning outcomes"
+                ],
+                promptExample: "Help me develop a 60-minute workshop on 'Understanding and Responsibly Using AI' for parents of secondary school students who have little technology experience but want to understand what their children are learning. The workshop should achieve the following learning objectives: 1) Basic understanding of AI functionality, 2) Awareness of opportunities and risks, 3) Practical tips for family life, 4) Conversation foundations with their children. Structure the workshop as follows: Icebreaker with everyday AI examples (10 min.), Interactive AI demonstration with simple tools (15 min.), Group discussion about concerns and hopes (15 min.), Practical exercise: Creating a useful prompt together (15 min.), Tips for family life and Q&A (5 min.). Develop for each section: Concrete activities, required materials, possible pitfalls and solutions, simple explanations without technical terms, take-home handouts. Consider that participants have different prior experiences and create a trusting, non-judgmental atmosphere. Also give me tips for moderation and handling critical questions.",
+                assessment: "Comprehensive evaluation: Curriculum quality (expert review), Teaching effectiveness (participant feedback), Knowledge transfer (pre/post assessments), Personal growth (reflection portfolios).",
+                euCompliance: "✅ Permitted (educational purpose, transparent identity of student teachers)",
+                quickStart: "Have students develop a 15-minute mini-workshop for classmates about AI basics!",
+                aiTools: ["Padlet", "Mentimeter", "Canva", "Flipchart", "Kahoot"]
+            },
+            {
+                id: 8,
+                title: "Community Problem-Solving Game Design",
+                description: "Students research real community challenges and develop learning games with AI to solve problems.",
+                time: "6-8 weeks",
+                implementation: [
+                    "Weeks 1-2: Community research and identification of local challenges",
+                    "Weeks 3-4: Stakeholder engagement and partnership with community organizations",
+                    "Weeks 5-6: Game design phase with AI tools for prototyping and content creation",
+                    "Week 7: Test cycles with community feedback and iteration",
+                    "Week 8: Public launch with community event and stakeholder presentations"
+                ],
+                promptExample: "Develop an interactive learning game on 'Sustainable Water Use in Our Community' for youth aged 12-16. The game should raise awareness of local water problems and show practical solutions. Create a game concept with the following elements: 1) Game mechanics: Decision-based strategy game with resource management, 2) Learning objectives: Understanding local water cycle, effects of waste, practical water-saving measures, 3) Game progression: 5 levels with increasing complexity, each level covers a different aspect (household consumption, agriculture, industry, environmental protection, future planning), 4) Reality connection: Real data from our region, interviews with local experts as NPCs, authentic community scenarios. Integrate gamification elements like points, achievements, and leaderboards, but ensure learning content remains in focus. The game should be playable both digitally (as web application) and analog (as board game). Develop specific learning controls and reflection questions for each level. Consider different learning types and create opportunities for teamwork and discussion.",
+                assessment: "Project-based evaluation: Problem research quality, Solution creativity, Community engagement effectiveness, Iterative improvement process.",
+                euCompliance: "✅ Permitted with community consent and non-sensitive content guidelines",
+                quickStart: "Start with a known local challenge and have students create a simple quiz about it!",
+                aiTools: ["Twine", "Scratch", "Canva", "Mentimeter", "Padlet"]
+            },
+            {
+                id: 9,
+                title: "AI Content Analysis and Community Publication",
+                description: "Students create AI-generated educational content, conduct rigorous fact-checking, and publish improved versions.",
+                time: "5-6 weeks",
+                implementation: [
+                    "Week 1: Content generation with AI on community-relevant topics",
+                    "Weeks 2-3: Critical analysis and identification of bias, gaps, and inaccuracies",
+                    "Week 4: Expert consultation and interviews with subject matter experts",
+                    "Week 5: Revision process and collaborative improvement of content quality",
+                    "Week 6: Community publication through local media or organizations"
+                ],
+                promptExample: "Create a comprehensive, fact-based guide on 'First Steps into Professional Life for Secondary School Graduates in [Your Region]' (2000-2500 words). The guide should practically support young people and their parents and cover the following areas: 1) Overview of training opportunities in the region with specific companies and industries, 2) Step-by-step guide for application processes (documents, appointments, deadlines), 3) Financial aspects (training compensation, support options, costs), 4) Further education opportunities and career paths after training, 5) Practical tips for job interviews and assessment centers, 6) Contact details and contacts (career counseling, Chamber of Commerce, local companies), 7) Checklists and timelines for career orientation. Use motivating but realistic language and integrate real experience reports from trainees. Structure the guide clearly with headings, summaries, and info boxes. Explicitly point out where information needs regular updates and which sources should be consulted for the latest data. The guide should be available as PDF and web version and be promoted in local media.",
+                assessment: "Portfolio evaluation: Critical analysis quality, Expert interview effectiveness, Revision quality, Community impact measurement.",
+                euCompliance: "✅ Fully compliant with generic prompts and community consent",
+                quickStart: "Have AI create a short text about a local topic and have students search for errors!",
+                aiTools: ["ChatGPT", "Claude", "Grammarly", "Canva", "Google Docs"]
+            },
+            {
+                id: 10,
+                title: "Cross-Curricular AI Innovation Teams",
+                description: "Mixed teams from different grade levels and subjects solve complex problems with AI tools and professional mentorship.",
+                time: "Full semester",
+                implementation: [
+                    "Month 1: Team formation and strategic mixing of different grade levels and subjects",
+                    "Month 2: Problem selection of complex topics with interdisciplinary approaches",
+                    "Months 3-4: Mentor matching and research phase with AI tools from multiple disciplines",
+                    "Month 5: Solution development and prototype creation with iterative community feedback",
+                    "Month 6: Professional presentation to relevant community stakeholders"
+                ],
+                promptExample: "You are an interdisciplinary research assistant. Our team (consisting of 8th, 9th, and 10th grade students from biology, computer science, economics, and ethics) wants to comprehensively investigate the problem 'Mental Health of Youth in Rural Areas' and develop solution approaches. Develop a structured research plan that integrates all subject areas: 1) Biological perspective: Neurological and hormonal factors in adolescents, effects of stress and social isolation, 2) Computer science perspective: Role of social media, digital support tools, data analysis of usage patterns, 3) Economic perspective: Costs of mental illness, availability of therapy places, financing models for prevention programs, 4) Ethical perspective: Privacy of health data, stigmatization, autonomy vs. care for minors. Create specific research questions, suitable methods, and possible AI tools for each perspective. Develop a timeline for a 6-month project and suggest how the different subject areas can work together. Identify potential community partners (doctors, therapists, school psychologists, youth organizations) and develop a guide for expert interviews. The goal is a practical solution proposal that could be implemented in the school or community.",
+                assessment: "Multi-dimensional evaluation: Interdisciplinary thinking (25%), AI tool integration (25%), Community engagement (25%), Collaborative effectiveness (25%).",
+                euCompliance: "✅ Permitted with non-personal prompts and appropriate supervision",
+                quickStart: "Form a small team from different subjects and have them analyze a local problem!",
+                aiTools: ["Miro", "Slack", "Google Workspace", "Notion", "Zoom"]
+            },
+            {
+                id: 11,
+                title: "AI Forensics Investigation Bureau",
+                description: "Students become 'AI detectives' investigating AI errors and bias incidents for authentic community service.",
+                time: "4-6 weeks",
+                implementation: [
+                    "Weeks 1-2: Detective training and systematic approaches to AI error analysis",
+                    "Week 3: Building case database with AI errors from news and research",
+                    "Week 4: Investigation process with structured frameworks",
+                    "Week 5: Community service through creation of public educational materials",
+                    "Week 6: Expert collaboration with university researchers and industry professionals"
+                ],
+                promptExample: "You are an AI security expert helping with forensic analysis of AI errors. Analyze the following fictional case: 'An AI system for evaluating job applications systematically rated women lower for technical positions, even though their qualifications were equivalent.' Conduct a comprehensive forensic analysis: 1) Error identification: What exactly went wrong? What type of bias is present?, 2) Cause analysis: Possible reasons in training data, algorithm design, implementation, 3) Impact assessment: Who was harmed? What social consequences occurred?, 4) Prevention strategies: How could this error have been prevented? What tests and controls would have been necessary?, 5) Solution approaches: Concrete steps for fixing and improving the system, 6) Educational material: Create an understandable explanation for the public showing how such errors occur and how citizens can recognize them. Use real examples and scientific findings, but explain everything so that laypeople can understand it. Develop a checklist that can help companies and organizations avoid similar problems when introducing AI systems.",
+                assessment: "Professional evaluation: Investigation depth, Analytical accuracy, Public communication effectiveness, Ethical reasoning quality.",
+                euCompliance: "✅ Safe with fictional/non-sensitive cases and proper attribution",
+                quickStart: "Show a known AI error from the news and have students investigate the cause!",
+                aiTools: ["Claude", "ChatGPT", "Perplexity", "Notion", "Miro"]
+            }
+        ];
+
+        function renderActivities() {
+            const grid = document.getElementById('activitiesGrid');
+            grid.innerHTML = activities.map(activity => `
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <h3>${activity.title}</h3>
+                        <div class="activity-meta">
+                            <span>🕒 ${activity.time}</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <div class="activity-description">${activity.description}</div>
+                        <button class="expand-btn" onclick="toggleDetails(${activity.id})">
+                            Show Details
+                        </button>
+                    </div>
+                    <div class="activity-details" id="details-${activity.id}">
+                        <div class="details-section">
+                            <h4>📋 Implementation</h4>
+                            <ol class="implementation-steps">
+                                ${activity.implementation.map(step => `<li>${step}</li>`).join('')}
+                            </ol>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h4>💬 Detailed Prompt Example</h4>
+                            <div class="prompt-example">
+                                <button class="copy-btn" onclick="copyPrompt(${activity.id})">📋 Copy</button>
+                                ${activity.promptExample}
+                            </div>
+                            <button class="download-btn" onclick="downloadActivity(${activity.id})">
+                                📥 Download Activity
+                            </button>
+                        </div>
+                        
+                        <div class="details-section">
+                            <h4>📊 Assessment</h4>
+                            <p>${activity.assessment}</p>
+                        </div>
+                        
+                        <div class="ai-tools">
+                            <h5>🛠️ Recommended AI Tools</h5>
+                            <div class="tools-list">
+                                ${activity.aiTools.map(tool => `<span class="tool-tag">${tool}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="eu-compliance">
+                            <h5>⚖️ AI Compliance</h5>
+                            <p>${activity.euCompliance}</p>
+                        </div>
+                        
+                        <div class="quick-start">
+                            <h5>🚀 Quick Start</h5>
+                            <p>${activity.quickStart}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleDetails(activityId) {
+            const details = document.getElementById('details-' + activityId);
+            const card = details.closest('.activity-card');
+            const btn = card.querySelector('.expand-btn');
+            
+            if (details.classList.contains('show')) {
+                details.classList.remove('show');
+                btn.textContent = 'Show Details';
+            } else {
+                details.classList.add('show');
+                btn.textContent = 'Hide Details';
+            }
+        }
+
+        function copyPrompt(activityId) {
+            const activity = activities.find(a => a.id === activityId);
+            if (activity && activity.promptExample) {
+                navigator.clipboard.writeText(activity.promptExample).then(() => {
+                    showToast('Prompt copied to clipboard!');
+                }).catch(() => {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = activity.promptExample;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    showToast('Prompt copied to clipboard!');
+                });
+            }
+        }
+
+        function downloadActivity(activityId) {
+            const activity = activities.find(a => a.id === activityId);
+            if (!activity) return;
+            
+            let content = `${activity.title}\n`;
+            content += `${'='.repeat(activity.title.length)}\n\n`;
+            content += `Description: ${activity.description}\n\n`;
+            content += `Duration: ${activity.time}\n\n`;
+            content += `IMPLEMENTATION:\n`;
+            content += `${activity.implementation.map((step, i) => `${i+1}. ${step}`).join('\n')}\n\n`;
+            content += `PROMPT EXAMPLE:\n`;
+            content += `${activity.promptExample}\n\n`;
+            content += `ASSESSMENT:\n`;
+            content += `${activity.assessment}\n\n`;
+            content += `AI TOOLS:\n`;
+            content += `${activity.aiTools.join(', ')}\n\n`;
+            content += `COMPLIANCE:\n`;
+            content += `${activity.euCompliance}\n\n`;
+            content += `QUICK START:\n`;
+            content += `${activity.quickStart}\n`;
+            
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${activity.title.replace(/[^a-zA-Z0-9]/g, '_')}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('Activity downloaded!');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            renderActivities();
+        });
+    </script>
+</body>
+</html>
