@@ -1,6 +1,6 @@
 # AI-Toolkit for Secondary Schools
 
-## Beschreibung
+## Description
 Creative and ethical AI integration for students ages 12-17. This interactive toolkit offers 11 structured activities for teachers to responsibly integrate AI into their classrooms.
 
 ## Target Group
