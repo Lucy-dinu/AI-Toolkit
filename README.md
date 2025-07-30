@@ -15,6 +15,9 @@ Creative and ethical AI integration for students ages 12-17. This interactive to
 - Grading rubric for each activity
 - Instant start tips for each activity
 
+## Usage
+Visit the toolkit: https://lucy-dinu.github.io/AI-Toolkit/
+
 ## License
 This toolkit is licensed under an open educational license for free use in educational institutions.
 
